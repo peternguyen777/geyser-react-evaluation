@@ -9,14 +9,16 @@ Congratulations 🎉 If you've made it here, you're a step closer to becoming a 
 
 ## Evaluation
 
-Completing online tests and evaluations is painful for everyone involved. We want to make this fun and give you a chance to show us what you can do with some real-world use case.
+Completing online tests is boring. We want to make this fun and give you a chance to show us what you can do with some real-world use case.
 
-This repository contains a boilerplate app configured with React and ChakraUI.
+This repository contains a boilerplate app configured with React and ChakraUI. Please find the instructions in the [evaluation](evaluation) directory.
 
 
-## Quick Start
+## Running the app
 
-In the project directory, you can run:
+You've read through the instructions and are ready to start buidling something cool? 😎 
+
+Start the app by running:
 
 ### `yarn start`
 
