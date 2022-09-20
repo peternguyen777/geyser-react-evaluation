@@ -5,10 +5,6 @@ This directory contains a few alternative evaluation options. They all consist o
 ## Options
 
 1. 💸 [Implement an Invoice View](invoice/README.md)
-2. [TBD](invoice/README.md)
-3. [TBD](invoice/README.md)
-
-Pick one, or more, of these options to implement.
 
 ## Evaluation Criteria
 
@@ -22,3 +18,7 @@ Pick one, or more, of these options to implement.
 At Geyser, we appreciate team members that take ownership and go the extra mile. Don't feel constrained by the evaluations' task description. Feel free to edit the boiler plate app in any way you see fit. 
 
 Make sure to report on any modifications you implement. Describe your motivation and reasoning for every change you make.
+
+## My comments 
+
+*add your own comments here*
