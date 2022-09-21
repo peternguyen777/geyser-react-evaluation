@@ -1,8 +1,14 @@
-import { Code, Text } from '@chakra-ui/react';
-import React from 'react';
+import Header from "../components/JSX/Header";
+import { Box } from "@chakra-ui/react";
+import ProjectDescription from "../components/JSX/ProjectDescription";
+import PaymentSideBar from "../components/JSX/PaymentSideBar";
 
 export const EvaluationSolution = () => {
-    return (
-        <Text paddingTop="10%" verticalAlign="center" textAlign="center">Implement me! See instructions in <Code>evaluation/README.md</Code></Text>
-    )
-}
+  return (
+    <Box bgColor='#FCFCFC' py={24}>
+      <Header />
+      <PaymentSideBar />
+      <ProjectDescription />
+    </Box>
+  );
+};
