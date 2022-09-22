@@ -1,11 +1,11 @@
-import Header from "../components/JSX/Header";
+import Header from "../components/Header";
 import { Box } from "@chakra-ui/react";
-import ProjectDescription from "../components/JSX/ProjectDescription";
-import PaymentSideBar from "../components/JSX/PaymentSideBar";
+import ProjectDescription from "../components/ProjectLayout/ProjectDescription";
+import PaymentSideBar from "../components/ProjectLayout/PaymentSideBar";
 
 export const EvaluationSolution = () => {
   return (
-    <Box bgColor='#FCFCFC' py={24}>
+    <Box py={24}>
       <Header />
       <PaymentSideBar />
       <ProjectDescription />

@@ -1,7 +1,11 @@
-import { Box, Image, HStack, Button, Text, Circle } from "@chakra-ui/react";
+import { Box, Image, HStack, Button, Text, Link } from "@chakra-ui/react";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/userSlice";
 
 function Header() {
+  const user = useSelector(selectUser);
+
   return (
     <Box
       display='flex'
@@ -15,16 +19,16 @@ function Header() {
       bgColor='#FCFCFC'
       zIndex='999'
     >
-      <Image src='/assets/logo-black.svg' width='28px' height='28px' />
-      <Text fontFamily='Inter' fontSize='18px' fontWeight='semibold'>
-        Annonymal
-      </Text>
+      <Link href='/'>
+        <Image src='/assets/logo-black.svg' width='28px' height='28px' />
+      </Link>
+      <Text as='h2'>Annonymal</Text>
 
       <HStack spacing={3}>
         <Button height={9} boxShadow='lg'>
-          <Circle size='20px' bg='#DEE2E6' color='white' mr='10px' />
+          <Image src={user.image} alt='' w={5} h={5} rounded='full' mr='10px' />
           <Text fontFamily='Inter' fontSize='14px' fontWeight='medium'>
-            Username
+            {user.name}
           </Text>
         </Button>
         <HiOutlineDotsCircleHorizontal
