@@ -1,14 +1,13 @@
 import { Box, Flex } from "@chakra-ui/react";
-
-//jsx
+//redux
+import { useSelector } from "react-redux";
+import { selectIsFunded, selectIsPaid } from "../../redux/paymentSlice";
+//tsx
 import PaymentConfirm from "./PaymentConfirm";
 import PaymentFund from "./PaymentFund";
 import PaymentSuccess from "./PaymentSuccess";
 
-//redux
-import { useSelector } from "react-redux";
-import { selectIsFunded, selectIsPaid } from "../../redux/paymentSlice";
-
+//PAYMENT SIDEBAR IS OPEN IF SCREENSIZE >= 1024px.
 function PaymentSideBar() {
   const isFunded = useSelector(selectIsFunded);
   const isPaid = useSelector(selectIsPaid);

@@ -23,12 +23,13 @@ import { setIsFunded, setIsPaid } from "../../redux/paymentSlice";
 //icons
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import BitcoinCircleIcon from "../Icons/bitcoin-circle";
-import CrossIcon from "../Icons/cross";
 import CopyIcon from "../Icons/copy";
 import TelegramIcon from "../Icons/telegram";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 //utils
 import { truncateString } from "../../lib/truncateString";
 
+//STEP 2. CONFIRM TRANSACTION, DISPLAY QR CODE.
 function PaymentConfirm() {
   const dispatch = useDispatch();
   //get the logged-in user's information (name, email, image)
@@ -61,16 +62,25 @@ function PaymentConfirm() {
       variant: "solid",
       status: "success",
       duration: 2000,
+      position: "bottom-right",
       isClosable: true,
     });
   };
 
   return (
     <>
-      <Flex justifyContent='space-between' width='100%' alignItems='center'>
-        <Text as='h2'>Confirm & fund</Text>
+      <Flex justifyContent='start' width='100%' alignItems='center'>
+        <ArrowBackIcon
+          onClick={() => dispatch(setIsFunded())}
+          w={5}
+          h={5}
+          cursor='pointer'
+        />
+        <Text as='h2' ml={2}>
+          Confirm & fund
+        </Text>
 
-        <CrossIcon onClick={() => dispatch(setIsFunded())} />
+        {/* <CrossIcon onClick={() => dispatch(setIsFunded())} /> */}
       </Flex>
       <Flex
         mt={3}

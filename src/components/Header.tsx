@@ -1,4 +1,4 @@
-import { Box, Image, HStack, Button, Text, Link } from "@chakra-ui/react";
+import { Box, Image, HStack, Button, Text, Link, Hide } from "@chakra-ui/react";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
@@ -25,12 +25,21 @@ function Header() {
       <Text as='h2'>Annonymal</Text>
 
       <HStack spacing={3}>
-        <Button height={9} boxShadow='lg'>
-          <Image src={user.image} alt='' w={5} h={5} rounded='full' mr='10px' />
-          <Text fontFamily='Inter' fontSize='14px' fontWeight='medium'>
-            {user.name}
-          </Text>
-        </Button>
+        <Hide below='md'>
+          <Button height={9} boxShadow='lg'>
+            <Image
+              src={user.image}
+              alt=''
+              w={5}
+              h={5}
+              rounded='full'
+              mr='10px'
+            />
+            <Text fontFamily='Inter' fontSize='14px' fontWeight='medium'>
+              {user.name}
+            </Text>
+          </Button>
+        </Hide>
         <HiOutlineDotsCircleHorizontal
           style={{
             height: "32px",

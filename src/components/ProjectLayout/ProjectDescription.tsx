@@ -12,70 +12,62 @@ import {
   ListItem,
   Link,
   Button,
-  Drawer,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
   useDisclosure,
+  Hide,
 } from "@chakra-ui/react";
+//icons
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { BsBoxArrowUp } from "react-icons/bs";
+//redux
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectSideBarDesktopOpen,
   toggleSideBarDesktop,
   toggleSideBarDesktopClose,
-  selectMenuOpen,
-  toggleMenu,
-  toggleMenuOpen,
-  toggleMenuClose,
   toggleSideBarDesktopOpen,
 } from "../../redux/uiSlice";
-import { selectIsFunded, selectIsPaid } from "../../redux/paymentSlice";
-import PaymentFund from "./PaymentFund";
-import PaymentConfirm from "./PaymentConfirm";
-import PaymentSuccess from "./PaymentSuccess";
+//tsx
+import PaymentMenuMobile from "./PaymentMenuMobile";
 
 // static placeholder information
 function ProjectDescription() {
   const dispatch = useDispatch();
-  const isFunded = useSelector(selectIsFunded);
-  const isPaid = useSelector(selectIsPaid);
   const sideBarDesktopOpen = useSelector(selectSideBarDesktopOpen);
-  const menuOpen = useSelector(selectMenuOpen);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const menuOpenHandler = () => {
-    if (window.innerWidth >= 1024) {
-      dispatch(toggleMenu());
-      dispatch(toggleSideBarDesktop());
-    } else if (window.innerWidth < 1024) {
-      onOpen();
-      dispatch(toggleMenu());
-    }
-  };
+  //hook to trigger mobile drawer menu.
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const closeMenuHandler = () => {
     onClose();
-    dispatch(toggleMenuClose());
+  };
+
+  //functions/use-effect hooks to open/close desktop or mobile menu depending on screen size.
+  const openMenuHandler = () => {
+    if (window.innerWidth >= 1024) {
+      dispatch(toggleSideBarDesktop());
+    } else if (window.innerWidth < 1024) {
+      onOpen();
+    }
   };
 
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 1024) {
-        if (menuOpen) {
-          dispatch(toggleSideBarDesktopClose());
-          onOpen();
-        }
+        dispatch(toggleSideBarDesktopClose());
       } else if (window.innerWidth >= 1024) {
-        if (menuOpen) {
-          dispatch(toggleSideBarDesktopOpen());
-          onClose();
-        }
+        dispatch(toggleSideBarDesktopOpen());
+        onClose();
       }
     }
     window.addEventListener("resize", handleResize);
   });
+
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      dispatch(toggleSideBarDesktopOpen());
+      onClose();
+    }
+  }, [dispatch, onClose]);
 
   return (
     <>
@@ -83,7 +75,12 @@ function ProjectDescription() {
         w={sideBarDesktopOpen ? "calc(100% - 423px)" : "100%"}
         justify='center'
       >
-        <Flex display='flex' flexDirection='column' px={10} maxW='840px'>
+        <Flex
+          display='flex'
+          flexDirection='column'
+          px={[4, 4, 10]}
+          maxW='840px'
+        >
           <Link href='/'>
             <Flex alignItems='center' cursor='pointer'>
               <ArrowBackIcon color='#6C757D' mr='7px' w={4} h={4} />
@@ -96,7 +93,7 @@ function ProjectDescription() {
               h={8}
               borderRadius='4px'
               bgColor='#20ECC7'
-              onClick={menuOpenHandler}
+              onClick={openMenuHandler}
             >
               <Text as='h5'>Fund</Text>
             </Button>
@@ -117,23 +114,33 @@ function ProjectDescription() {
               >
                 12 July 2022
               </Text>
-              <Text
-                fontFamily='Inter'
-                fontSize='16px'
-                fontWeight='normal'
-                lineHeight='140%'
-                color='#212529'
-                opacity='80%'
-              >
-                FW to Bitcoin Racing
-              </Text>
+              <Hide below='md'>
+                <Text
+                  fontFamily='Inter'
+                  fontSize='16px'
+                  fontWeight='normal'
+                  lineHeight='140%'
+                  color='#212529'
+                  opacity='80%'
+                >
+                  FW to Bitcoin Racing
+                </Text>
+              </Hide>
               <BsBoxArrowUp cursor='pointer' color='#212529' />
             </HStack>
-            <AvatarGroup size='sm'>
-              <Avatar name='Ryan Florence' src='https://bit.ly/ryan-florence' />
-              <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
-              <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
-            </AvatarGroup>
+            <Hide below='md'>
+              <AvatarGroup size='sm'>
+                <Avatar
+                  name='Ryan Florence'
+                  src='https://bit.ly/ryan-florence'
+                />
+                <Avatar
+                  name='Segun Adebayo'
+                  src='https://bit.ly/sage-adebayo'
+                />
+                <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
+              </AvatarGroup>
+            </Hide>
           </Flex>
           <Image src='/assets/image 420.png' alt='' mt={4} />
           <Box py={4} px='10px' mt={4} bgColor='#E9FFFB' rounded='4px'>
@@ -200,24 +207,11 @@ function ProjectDescription() {
           </Text>
         </Flex>
       </Flex>
-
-      <Drawer onClose={closeMenuHandler} isOpen={isOpen} size='full'>
-        <DrawerContent mt='60px' bgColor='#FCFCFC'>
-          <DrawerCloseButton />
-
-          <DrawerBody>
-            {isFunded ? (
-              isPaid ? (
-                <PaymentSuccess closeMenuHandler={closeMenuHandler} />
-              ) : (
-                <PaymentConfirm />
-              )
-            ) : (
-              <PaymentFund />
-            )}
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <PaymentMenuMobile
+        onClose={onClose}
+        isOpen={isOpen}
+        closeMenuHandler={closeMenuHandler}
+      />
     </>
   );
 }

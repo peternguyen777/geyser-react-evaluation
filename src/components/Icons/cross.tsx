@@ -1,4 +1,4 @@
-import { Icon } from "@chakra-ui/react";
+import { Center, Icon } from "@chakra-ui/react";
 import { HiXCircle } from "react-icons/hi";
 
 interface ClickProps {
@@ -6,9 +6,9 @@ interface ClickProps {
 }
 function CrossIcon({ onClick }: ClickProps) {
   return (
-    <div onClick={onClick}>
+    <Center onClick={onClick}>
       <Icon as={HiXCircle} w={5} h={5} color='#495057' cursor='pointer' />
-    </div>
+    </Center>
   );
 }
 

@@ -10,6 +10,9 @@ export interface FundingState {
   invoiceQr: string;
 }
 
+//initial suggested sat donation of 500.
+//btcPrice and usdValue will be updated via API call.
+//dummy reward and invoice QR code (generated from back-end).
 const initialState: FundingState = {
   satValue: 500,
   usdValue: 0,
@@ -43,11 +46,9 @@ export const fundingSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setSatValue, setUsdValue, setBtcPrice, setComment } =
   fundingSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectSatValue = (state: RootState) => state.funding.satValue;
 export const selectUsdValue = (state: RootState) => state.funding.usdValue;
 export const selectBtcPrice = (state: RootState) => state.funding.btcPrice;

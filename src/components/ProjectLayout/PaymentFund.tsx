@@ -30,6 +30,7 @@ import { setIsFunded } from "../../redux/paymentSlice";
 //icons
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
+//STEP 1. FUND PROJECT. ENTER SATS VALUE AND COMMENT.
 function PaymentFund() {
   const dispatch = useDispatch();
   const satValue = useSelector(selectSatValue);
@@ -52,7 +53,7 @@ function PaymentFund() {
   };
 
   //error state for sats input
-  const isError = (satValue || 0) < 50;
+  const isError = (satValue || 0) < 50 || (satValue || 0) > 1000000000;
 
   //fetch BTC price data and store in redux
   useEffect(() => {
@@ -114,7 +115,7 @@ function PaymentFund() {
           ) : (
             <FormErrorMessage>
               <Text as='h6' color='red.500'>
-                Minimum donation 50 sats
+                Donate between 50 to 1,000,000,000 sats
               </Text>
             </FormErrorMessage>
           )}

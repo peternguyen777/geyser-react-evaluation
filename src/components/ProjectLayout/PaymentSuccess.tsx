@@ -1,5 +1,5 @@
 import { Text, Flex, Button, HStack, Image } from "@chakra-ui/react";
-import Animation from "../Icons/animation";
+//redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
 import { setIsFunded, setIsPaid } from "../../redux/paymentSlice";
@@ -9,18 +9,22 @@ import {
   setComment,
   setSatValue,
 } from "../../redux/fundingSlice";
+//icons, animation
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Animation from "../Icons/animation";
 
 interface onCloseProps {
   closeMenuHandler: () => void;
 }
 
+//STEP 3. SUCCESS PAGE WHEN INVOICE IS PAID.
 function PaymentSuccess({ closeMenuHandler }: onCloseProps) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const comment = useSelector(selectComment);
   const satValue = useSelector(selectSatValue);
 
+  //resets all funding to default values in-case user wants to make another donation.
   const resetClickHandler = () => {
     dispatch(setIsFunded());
     dispatch(setIsPaid());

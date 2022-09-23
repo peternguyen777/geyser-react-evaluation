@@ -11,6 +11,8 @@ const initialState: paymentState = {
   isFunded: false,
 };
 
+//isFunded triggers Confirm Component.
+//isPaid triggers Success Component.
 export const paymentSlice = createSlice({
   name: "payment",
   initialState,
@@ -26,7 +28,6 @@ export const paymentSlice = createSlice({
 
 export const { setIsFunded, setIsPaid } = paymentSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectIsPaid = (state: RootState) => state.payment.isPaid;
 export const selectIsFunded = (state: RootState) => state.payment.isFunded;
 
