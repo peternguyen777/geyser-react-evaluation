@@ -3,10 +3,19 @@ import Animation from "../Icons/animation";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
 import { setIsFunded, setIsPaid } from "../../redux/paymentSlice";
-import { selectComment, selectSatValue } from "../../redux/fundingSlice";
+import {
+  selectComment,
+  selectSatValue,
+  setComment,
+  setSatValue,
+} from "../../redux/fundingSlice";
 import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
-function PaymentSuccess() {
+interface onCloseProps {
+  closeMenuHandler: () => void;
+}
+
+function PaymentSuccess({ closeMenuHandler }: onCloseProps) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const comment = useSelector(selectComment);
@@ -15,6 +24,11 @@ function PaymentSuccess() {
   const resetClickHandler = () => {
     dispatch(setIsFunded());
     dispatch(setIsPaid());
+    dispatch(setSatValue(500));
+    dispatch(setComment(""));
+    if (window.innerWidth < 1024) {
+      closeMenuHandler();
+    }
   };
 
   return (

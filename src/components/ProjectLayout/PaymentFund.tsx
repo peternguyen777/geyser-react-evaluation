@@ -77,7 +77,7 @@ function PaymentFund() {
 
   return (
     <>
-      <Text as='h2'>Fund this Project!</Text>
+      <Text as='h2'>Fund this Project</Text>
       <form onSubmit={handleSubmit}>
         <FormControl w='100%' mt={4} isInvalid={isError}>
           <FormLabel as='h5'>Pledge:</FormLabel>

@@ -29,7 +29,7 @@ function PaymentSideBar() {
       <Flex p='6px' flexDirection='column'>
         {isFunded ? (
           isPaid ? (
-            <PaymentSuccess />
+            <PaymentSuccess closeMenuHandler={() => {}} />
           ) : (
             <PaymentConfirm />
           )

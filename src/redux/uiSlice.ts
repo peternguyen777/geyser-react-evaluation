@@ -1,35 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
 
 export interface uiState {
-  value: number;
+  sideBarDesktopOpen: boolean;
+  menuOpen: boolean;
 }
 
 const initialState: uiState = {
-  value: 0,
+  sideBarDesktopOpen: false,
+  menuOpen: false,
 };
 
 export const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    toggleSideBarDesktop: (state) => {
+      state.sideBarDesktopOpen = !state.sideBarDesktopOpen;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    toggleSideBarDesktopClose: (state) => {
+      state.sideBarDesktopOpen = false;
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    toggleSideBarDesktopOpen: (state) => {
+      state.sideBarDesktopOpen = true;
+    },
+    toggleMenu: (state) => {
+      state.menuOpen = !state.menuOpen;
+    },
+    toggleMenuClose: (state) => {
+      state.menuOpen = false;
+    },
+    toggleMenuOpen: (state) => {
+      state.menuOpen = true;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = uiSlice.actions;
+export const {
+  toggleSideBarDesktopClose,
+  toggleSideBarDesktopOpen,
+  toggleSideBarDesktop,
+  toggleMenu,
+  toggleMenuClose,
+  toggleMenuOpen,
+} = uiSlice.actions;
+
+// Other code such as selectors can use the imported `RootState` type
+export const selectSideBarDesktopOpen = (state: RootState) =>
+  state.ui.sideBarDesktopOpen;
+export const selectMenuOpen = (state: RootState) => state.ui.menuOpen;
 
 export default uiSlice.reducer;
